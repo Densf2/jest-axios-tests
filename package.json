@@ -1,0 +1,12 @@
+{
+  "name": "axios-jest",
+  "version": "1.0.0",
+  "description": "tests for api endpoints based on axios & jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Denys Pavliuk",
+  "license": "ISC"
+}
