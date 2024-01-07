@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "Denys Pavliuk",
-  "license": "ISC"
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^1.6.5",
+    "jest": "^29.7.0"
+  }
 }
