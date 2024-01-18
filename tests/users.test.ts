@@ -1,4 +1,6 @@
 import axios from 'axios';
+import jsonpath from 'jsonpath'
+import { writeFile } from 'node:fs'
 
 test('get list of users', async () => {
     const response = await axios.get('https://dummyjson.com/users', {
@@ -21,4 +23,9 @@ test('get list of users', async () => {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
 });
+let uname = jsonpath.query(response.data, '$.users[25].username')
+let pass = jsonpath.query(response.data, '$.users[25].password')
+//await writeFile('response.json', JSON.stringify(response.data), 'utf8', (err) => {
+//    if (err) throw err;
+//    console.log('The file has been saved!')})
 });
