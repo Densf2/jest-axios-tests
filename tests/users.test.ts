@@ -2,8 +2,11 @@ import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs'
 
+// list of variables used in the test scenarios
 let uname: String
 let pass: String
+let auth_token: String
+
 test('get list of users', async () => {
     const response = await axios.get('https://dummyjson.com/users', {
         headers: {
@@ -20,7 +23,6 @@ test('get list of users', async () => {
     //    console.log('The file has been saved!')})
 });
 
-
 test('get token by user credetials', async () => {
     const token_response = await axios.post('https://dummyjson.com/auth/login',
         {
@@ -30,5 +32,5 @@ test('get token by user credetials', async () => {
         {
             headers: { 'Content-Type': 'application/json' }
         })
-    console.log(token_response.data)
+    auth_token = String(jsonpath.query(token_response.data, '$..token'))
 })
