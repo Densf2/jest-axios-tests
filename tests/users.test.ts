@@ -1,6 +1,7 @@
 import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs/promises'
+import { faker } from '@faker-js/faker';
 
 // list of variables used in the test scenarios
 let uname: String
@@ -50,5 +51,9 @@ describe('dealing with products', () => {
                    'Authorization': `Bearer ${auth_token}` 
         }})
         expect(get_all_products.status).toEqual(200)
-    } )
+    })
+
+    test('get product by id', async() => {
+
+    })
 })
