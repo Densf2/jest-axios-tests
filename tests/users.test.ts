@@ -6,6 +6,7 @@ import { writeFile } from 'node:fs/promises'
 let uname: String
 let pass: String
 let auth_token: String
+
 describe('getting token', () => {
     test('get list of users', async () => {
         const response = await axios.get('https://dummyjson.com/users', {
@@ -40,4 +41,14 @@ describe('getting token', () => {
             console.error('issue with saving token', err.message)
         }
     })
+})
+
+describe('dealing with products', () => {
+    test('get all products', async() => {
+        const get_all_products = await axios.get('https://dummyjson.com/products',
+        {headers: {'Content-Type': 'application/json',
+                   'Authorization': `Bearer ${auth_token}` 
+        }})
+        expect(get_all_products.status).toEqual(200)
+    } )
 })
