@@ -24,7 +24,7 @@ describe('getting token', () => {
         //    console.log('The file has been saved!')})
     });
 
-    test('get token by user credetials', async () => {
+    test('get token by user credentials', async () => {
         const token_response = await axios.post('https://dummyjson.com/auth/login',
             {
                 'username': uname,
