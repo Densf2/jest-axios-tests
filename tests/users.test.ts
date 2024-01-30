@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs/promises'
-
+ 
 // list of variables used in the test scenarios
 let uname: String
 let pass: String
@@ -34,8 +34,11 @@ describe('getting token', () => {
                 headers: { 'Content-Type': 'application/json' }
             })
         auth_token = String(jsonpath.query(token_response.data, '$..token'))
+        let new_data = {
+            token: auth_token
+        }
         try {
-            await writeFile('data/token2.json', JSON.stringify(auth_token))
+            await writeFile('data/token2.json', JSON.stringify(new_data))
             console.log('The token has been saved!')
         } catch (err: any) {
             console.error('issue with saving token', err.message)
