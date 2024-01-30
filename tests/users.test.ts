@@ -1,8 +1,7 @@
 import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs/promises'
-import { faker } from '@faker-js/faker';
-
+ 
 // list of variables used in the test scenarios
 let uname: String
 let pass: String
@@ -25,7 +24,7 @@ describe('getting token', () => {
         //    console.log('The file has been saved!')})
     });
 
-    test('get token by user credetials', async () => {
+    test('get token by user credentials', async () => {
         const token_response = await axios.post('https://dummyjson.com/auth/login',
             {
                 'username': uname,
@@ -35,8 +34,11 @@ describe('getting token', () => {
                 headers: { 'Content-Type': 'application/json' }
             })
         auth_token = String(jsonpath.query(token_response.data, '$..token'))
+        let new_data = {
+            token: auth_token
+        }
         try {
-            await writeFile('token2.json', JSON.stringify(auth_token))
+            await writeFile('data/token2.json', JSON.stringify(new_data))
             console.log('The token has been saved!')
         } catch (err: any) {
             console.error('issue with saving token', err.message)
@@ -44,21 +46,3 @@ describe('getting token', () => {
     })
 })
 
-describe('dealing with products', () => {
-    test('get all products', async() => {
-        const get_all_products = await axios.get('https://dummyjson.com/products',
-        {headers: {'Content-Type': 'application/json',
-                   'Authorization': `Bearer ${auth_token}` 
-        }})
-        expect(get_all_products.status).toEqual(200)
-    })
-
-    test('get product by id', async() => {
-        let fNumber = faker.number.int({max: 20})
-        const get_product_by_id = await axios.get(`https://dummyjson.com/products/${fNumber}`,
-        {headers: {'Content-Type': 'application/json',
-                   'Authorization': `Bearer ${auth_token}` 
-        }})
-        expect(get_product_by_id.status).toEqual(200)
-    })
-})
