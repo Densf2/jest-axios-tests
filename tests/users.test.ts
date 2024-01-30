@@ -35,7 +35,7 @@ describe('getting token', () => {
             })
         auth_token = String(jsonpath.query(token_response.data, '$..token'))
         try {
-            await writeFile('token2.json', JSON.stringify(auth_token))
+            await writeFile('data/token2.json', JSON.stringify(auth_token))
             console.log('The token has been saved!')
         } catch (err: any) {
             console.error('issue with saving token', err.message)
