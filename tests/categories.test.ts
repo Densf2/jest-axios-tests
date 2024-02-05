@@ -26,4 +26,13 @@ describe('Categories', () => {
             expect(get_specific_category.status).toEqual(200)
         }
     }, 30000)
+
+    test('create new product', async () => {
+        const create_product = await axios.post('https://dummyjson.com/products/add',
+        {
+            'title': 'BMW Pencil'
+        },{
+            headers: { 'Content-Type': 'application/json' }
+        })
+    })
 })
