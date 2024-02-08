@@ -28,11 +28,26 @@ describe('Categories', () => {
     }, 30000)
 
     test('create new product for smartphones category', async () => {
-        let category = arrCategories[0]
+        let categorySmartphones = arrCategories[0]
         const create_product = await axios.post('https://dummyjson.com/products/add',
             {
                 'title': 'Zoho MK121',
-                'category': `${category}`
+                'category': `${categorySmartphones}`
+            }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${data.token}`
+            }
+
+        })
+    })
+
+    test('create new product for laptops category', async () => {
+        let categoryLaptops  = arrCategories[1]
+        const create_product = await axios.post('https://dummyjson.com/products/add',
+            {
+                'title': 'Kenovo L21',
+                'category': `${categoryLaptops}`
             }, {
             headers: {
                 'Content-Type': 'application/json',
