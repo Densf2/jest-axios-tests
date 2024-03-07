@@ -4,7 +4,8 @@
   "description": "tests for api endpoints based on axios & jest",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "Denys Pavliuk",

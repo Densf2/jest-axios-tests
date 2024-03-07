@@ -1,2 +1,3 @@
 for trigger the tests need to use command:
-npx jest tests/users.test.ts
+npx jest tests/users.test.ts \
+added husky package for pre-commit verification
