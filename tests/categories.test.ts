@@ -1,5 +1,6 @@
 import axios from 'axios';
 import data from '../data/token2.json';
+/* eslint semi: ["error", "never"] */
 
 describe('Categories', () => {
   let arrCategories: string[] = [];
@@ -21,8 +22,8 @@ describe('Categories', () => {
   test('get category by id', async () => {
     // iterate all categories received in request above
     for (let i = 0; i < arrCategories.length; i++) {
-      let id = [i];
-      let category = arrCategories[i];
+      const id = [i];
+      const category = arrCategories[i];
       const get_specific_category = await axios.get(
         `https://dummyjson.com/products/category/${category}`,
       );
@@ -31,7 +32,7 @@ describe('Categories', () => {
   }, 30000);
 
   test('create new product for smartphones category', async () => {
-    let categorySmartphones = arrCategories[0];
+    const categorySmartphones = arrCategories[0];
     const create_product = await axios.post(
       'https://dummyjson.com/products/add',
       {
@@ -48,7 +49,7 @@ describe('Categories', () => {
   });
 
   test('create new product for laptops category', async () => {
-    let categoryLaptops = arrCategories[1];
+    const categoryLaptops = arrCategories[1];
     const create_product = await axios.post(
       'https://dummyjson.com/products/add',
       {
