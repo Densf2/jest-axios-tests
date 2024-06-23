@@ -1,11 +1,12 @@
-import axios from 'axios';
-import jsonpath from 'jsonpath';
-import { writeFile } from 'node:fs/promises';
+/* eslint-disable @typescript-eslint/comma-dangle */
+import axios from 'axios'
+import jsonpath from 'jsonpath'
+import { writeFile } from 'node:fs/promises'
 
 // list of variables used in the test scenarios
-let uname: String;
-let pass: String;
-let auth_token: String;
+let uname: string
+let pass: string
+let authToken: string
 
 describe('getting token', () => {
   test('get list of users', async () => {
@@ -14,18 +15,17 @@ describe('getting token', () => {
         authority: 'dummyjson.com',
         referer: 'https://dummyjson.com/docs/auth',
       },
-    });
-    uname = String(jsonpath.query(response.data, '$.users[25].username'));
-    pass = String(jsonpath.query(response.data, '$.users[25].password'));
-    // console.log(uname)
-    // console.log(pass)
-    //await writeFile('response.json', JSON.stringify(response.data), 'utf8', (err) => {
+    })
+    uname = String(jsonpath.query(response.data, '$.users[25].username'))
+    pass = String(jsonpath.query(response.data, '$.users[25].password'))
+    // step used to debug response data & save into the file
+    // await writeFile('response.json', JSON.stringify(response.data), 'utf8', (err) => {
     //    if (err) throw err;
     //    console.log('The file has been saved!')})
-  });
+  })
 
   test('get token by user credentials', async () => {
-    const token_response = await axios.post(
+    const tokenResponse = await axios.post(
       'https://dummyjson.com/auth/login',
       {
         username: uname,
@@ -34,16 +34,16 @@ describe('getting token', () => {
       {
         headers: { 'Content-Type': 'application/json' },
       },
-    );
-    auth_token = String(jsonpath.query(token_response.data, '$..token'));
-    let new_data = {
-      token: auth_token,
-    };
-    try {
-      await writeFile('data/token2.json', JSON.stringify(new_data));
-      console.log('The token has been saved!');
-    } catch (err: any) {
-      console.error('issue with saving token', err.message);
+    )
+    authToken = String(jsonpath.query(tokenResponse.data, '$..token'))
+    const newData = {
+      token: authToken,
     }
-  });
-});
+    try {
+      await writeFile('data/token2.json', JSON.stringify(newData))
+      console.log('The token has been saved!')
+    } catch (err: any) {
+      console.error('issue with saving token', err.message)
+    }
+  })
+})
