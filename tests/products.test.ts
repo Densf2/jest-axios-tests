@@ -8,8 +8,8 @@ describe('dealing with products', () => {
     const get_all_products = await axios.get('https://dummyjson.com/products', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${data.token}`,
-      },
+        Authorization: `Bearer ${data.token}`
+      }
     })
     expect(get_all_products.status).toEqual(200)
   })
@@ -21,9 +21,9 @@ describe('dealing with products', () => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${data.token}`,
-        },
-      },
+          Authorization: `Bearer ${data.token}`
+        }
+      }
     )
     expect(get_product_by_id.status).toEqual(200)
   })
