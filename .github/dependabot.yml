@@ -1,6 +1,3 @@
-# verification depenndecies list and update outdated
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
 updates:
   - package-ecosystem: 'npm'
