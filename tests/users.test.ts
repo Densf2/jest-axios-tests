@@ -2,6 +2,7 @@
 import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs/promises'
+import { BASE_URL, USERS_URL, AUTH_URL } from '../constants'
 
 // list of variables used in the test scenarios
 let uname: string
@@ -10,10 +11,10 @@ let authToken: string
 
 describe('getting token', () => {
   test('get list of users', async () => {
-    const response = await axios.get('https://dummyjson.com/users', {
+    const response = await axios.get(USERS_URL, {
       headers: {
         authority: 'dummyjson.com',
-        referer: 'https://dummyjson.com/docs/auth',
+        referer: `${BASE_URL}/docs/auth`,
       },
     })
     uname = String(jsonpath.query(response.data, '$.users[25].username'))
@@ -26,7 +27,7 @@ describe('getting token', () => {
 
   test('get token by user credentials', async () => {
     const tokenResponse = await axios.post(
-      'https://dummyjson.com/auth/login',
+      AUTH_URL,
       {
         username: uname,
         password: pass,
