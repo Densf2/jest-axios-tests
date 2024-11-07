@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jest tests/users.test.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "Denys Pavliuk",

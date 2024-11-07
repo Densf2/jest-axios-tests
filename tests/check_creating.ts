@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/comma-dangle */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 // request with based on fetch api
 fetch('https://dummyjson.com/auth/login', {
   method: 'POST',
@@ -8,5 +10,5 @@ fetch('https://dummyjson.com/auth/login', {
     // expiresInMins: 60, // optional
   }),
 })
-  .then((res) => res.json())
-  .then(console.log);
+  .then(async (res) => await res.json())
+  .then(console.log)
