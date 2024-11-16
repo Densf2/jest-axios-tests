@@ -17,8 +17,8 @@ describe('getting token', () => {
         referer: `${BASE_URL}/docs/auth`,
       },
     })
-    uname = String(jsonpath.query(response.data, '$.users[25].username'))
-    pass = String(jsonpath.query(response.data, '$.users[25].password'))
+    uname = String(jsonpath.query(response.data, '$.users[5].username'))
+    pass = String(jsonpath.query(response.data, '$.users[5].password'))
     // step used to debug response data & save into the file
     // await writeFile('response.json', JSON.stringify(response.data), 'utf8', (err) => {
     //    if (err) throw err;
@@ -36,7 +36,7 @@ describe('getting token', () => {
         headers: { 'Content-Type': 'application/json' },
       },
     )
-    authToken = String(jsonpath.query(tokenResponse.data, '$..token'))
+    authToken = String(jsonpath.query(tokenResponse.data, '$..accessToken'))
     const newData = {
       token: authToken,
     }
