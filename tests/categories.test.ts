@@ -9,9 +9,11 @@ const HEADERS = {
   Authorization: `Bearer ${data.token}`,
 }
 
+const idArr: number[] = []
+
 describe('Categories', () => {
   let arrCategories: string[] = []
-  test('get all products', async () => {
+  test('get all categories', async () => {
     const getAllCategories = await axios.get(`${PRODUCTS_URL}/categories`, {
       headers: HEADERS,
     })
@@ -43,6 +45,7 @@ describe('Categories', () => {
       },
     )
     expect(createProduct.status).toEqual(201)
+    idArr.push(Number(createProduct.data.id))
   })
 
   test('create new product for laptops category', async () => {
@@ -58,5 +61,36 @@ describe('Categories', () => {
       },
     )
     expect(createProduct.status).toEqual(201)
+    idArr.push(Number(createProduct.data.id))
+  })
+
+  test('update a product', async () => {
+    const productId = 1 // Example product ID
+    const updateProduct = await axios.put(
+      `${PRODUCTS_URL}/${productId}`,
+      {
+        title: 'Updated Product Title',
+      },
+      {
+        headers: HEADERS,
+      },
+    )
+    expect(updateProduct.status).toEqual(200)
+  })
+
+  test('delete products', async () => {
+    for (const productId of idArr) {
+      try {
+        const deleteProduct = await axios.delete(`${PRODUCTS_URL}/${productId}`)
+        expect(deleteProduct.status).toEqual(200)
+        console.log(deleteProduct.status)
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          console.log(`Product with ID ${productId} not found (404)`)
+        } else {
+          throw error
+        }
+      }
+    }
   })
 })
