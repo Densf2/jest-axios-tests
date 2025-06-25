@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/comma-dangle */
-import { faker } from '@faker-js/faker'
+ import { faker } from '@faker-js/faker'
 import axios from 'axios'
 import data from '../data/token2.json'
 import { BASE_URL } from '../constants'
