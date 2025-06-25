@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import axios from 'axios'
 import data from '../data/token2.json'
 import { PRODUCTS_URL } from '../constants'

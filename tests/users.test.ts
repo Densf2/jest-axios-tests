@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import axios from 'axios'
 import jsonpath from 'jsonpath'
 import { writeFile } from 'node:fs/promises'
@@ -12,10 +11,7 @@ let authToken: string
 describe('getting token', () => {
   test('get list of users', async () => {
     const response = await axios.get(USERS_URL, {
-      headers: {
-        authority: 'dummyjson.com',
-        referer: `${BASE_URL}/docs/auth`,
-      },
+      headers: { authority: 'dummyjson.com', referer: `${BASE_URL}/docs/auth` },
     })
     uname = String(jsonpath.query(response.data, '$.users[5].username'))
     pass = String(jsonpath.query(response.data, '$.users[5].password'))
@@ -28,23 +24,18 @@ describe('getting token', () => {
   test('get token by user credentials', async () => {
     const tokenResponse = await axios.post(
       AUTH_URL,
-      {
-        username: uname,
-        password: pass,
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-      },
+      { username: uname, password: pass },
+      { headers: { 'Content-Type': 'application/json' } },
     )
     authToken = String(jsonpath.query(tokenResponse.data, '$..accessToken'))
-    const newData = {
-      token: authToken,
-    }
+    const newData = { token: authToken }
     try {
       await writeFile('data/token2.json', JSON.stringify(newData))
       console.log('The token has been saved!')
-    } catch (err: any) {
-      console.error('issue with saving token', err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error('issue with saving token', err.message)
+      }
     }
   })
 })
